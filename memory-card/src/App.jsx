@@ -1,9 +1,14 @@
 import "./App.css";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import Card from "./components/card/Card";
 
 function App() {
   return (
     <>
-      <h1>Memory Card </h1>
+      <Header />
+      <Card />
+      <Footer />
     </>
   );
 }
