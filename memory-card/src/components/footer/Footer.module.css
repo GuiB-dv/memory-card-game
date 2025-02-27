@@ -1,0 +1,13 @@
+.footer {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-end;
+  background-color: #edf3f6;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
