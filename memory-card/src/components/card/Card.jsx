@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import styles from "./Card.module.css";
 
-const Card = ({ pokemon }) => {
+const Card = ({ pokemon, onClick, onGameOver }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
     if (isClicked) {
       // game over
       console.log("It is clicked already");
+      onGameOver();
     } else {
       setIsClicked(true);
+      onClick();
     }
   };
 
