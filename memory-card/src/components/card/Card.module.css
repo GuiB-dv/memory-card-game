@@ -3,6 +3,27 @@
   align-items: center;
   flex-direction: column;
 
+  background-color: #faf5aa;
+}
+
+.pkmnName {
+  text-align: center;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 0.7em;
+
+  max-width: 100px;
+  text-wrap: wrap;
+  width: 85%;
+  text-align: center;
+  margin: auto;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: calc(8px * 0.3) 0;
+
+  background-color: white;
+}
+
+.img {
   background-color: aliceblue;
-  margin: 5px;
+  margin-bottom: 0.3em;
 }

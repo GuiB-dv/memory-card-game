@@ -18,8 +18,12 @@ const Card = ({ pokemon, onClick, onGameOver }) => {
   return (
     <>
       <div className={styles.card} onClick={handleClick}>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        <h2>{pokemon.name}</h2>
+        <img
+          className={styles.img}
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+        />
+        <p className={styles.pkmnName}>{pokemon.name}</p>
       </div>
     </>
   );

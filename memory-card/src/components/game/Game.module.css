@@ -1,5 +1,64 @@
+:root {
+  --padding: 8px;
+  --margin: 16px;
+
+  --condensed-font: "Roboto Condensed", sans-serif;
+}
 .game {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: calc(var(--padding) * 2);
+
+  gap: var(--margin);
+  justify-items: center;
+
+  width: max-content;
+  margin: auto;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+  justify-items: center;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  border: 3px solid #aaa;
+  padding: var(--padding);
+  min-width: max-content;
+  min-height: 100%;
+
+  width: 650px;
+  height: max-content;
+  min-height: 500px;
+  background-color: #d0ecff;
+  position: relative;
+}
+.cardGame:hover {
+  cursor: pointer;
+}
+
+.cardGame {
+  min-width: max-content;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+
+  position: relative;
+
+  width: 120px;
+  height: 150px;
+
+  border: 5px solid #f8ea1e;
+  border-radius: 5px;
+  background-color: #faf5aa;
+}
+
+.score {
+}
+
+.highScore {
 }

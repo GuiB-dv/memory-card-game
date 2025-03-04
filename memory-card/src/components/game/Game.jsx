@@ -11,7 +11,6 @@ const Game = () => {
   const [error, setError] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [overAllScore, setOverAllScore] = useState(0);
-  const [score, setScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [highScore, setHighScore] = useState(0);
 
@@ -20,6 +19,7 @@ const Game = () => {
       const numberOfCards = level * 5;
       const data = await fetchMultiplePokemon(numberOfCards);
       setPokemonList(data);
+      console.log("level", level);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -27,12 +27,12 @@ const Game = () => {
     }
   };
 
+  // Series of actions when level is updated
   useEffect(() => {
+    setClickedCards([]);
+    setPokemonList([]);
     fetchData();
-    setScore(0);
   }, [level]);
-
-  // Levels
 
   // Retrieve high score from localStorage on component mount
   useEffect(() => {
@@ -58,15 +58,14 @@ const Game = () => {
     if (clickedCards.includes(pokemonId)) {
       restartGame();
     } else {
-      setScore((prevScore) => prevScore + 1);
       setOverAllScore((prevOverAllScore) => prevOverAllScore + 1);
       console.log(`Clicked on Pokémon with ID: ${pokemonId}`);
       shuffleCards();
       setClickedCards((prevClickedCards) => [...prevClickedCards, pokemonId]);
 
-      // Checks if player has finished current level
-      if (score + 1 === level * 5) {
-        setLevel((prevLevel) => prevLevel + 1); //move to the next level
+      // Check if all cards in the current level have been clicked
+      if (clickedCards.length + 1 === pokemonList.length) {
+        setLevel((prevLevel) => prevLevel + 1); // Move to the next level
       }
     }
   };
@@ -74,17 +73,18 @@ const Game = () => {
   // Restart the game
   const restartGame = () => {
     setGameOver(false);
-    setPokemonList([]);
-    setIsLoading(true);
-    fetchData();
-    setClickedCards([]);
-    setScore(0);
-    setOverAllScore(0);
     setLevel(1);
     setPokemonList([]);
+    setIsLoading(true);
+    setClickedCards([]);
+    setOverAllScore(0);
     // Update high score if the current score is greater
-    if (score > highScore) {
-      setHighScore(score);
+    if (overAllScore > highScore) {
+      setHighScore(overAllScore);
+    }
+    // Fetch data if level is one
+    if (level === 1) {
+      fetchData();
     }
   };
 
@@ -93,7 +93,7 @@ const Game = () => {
     if (gameOver) {
       const confirmRestart = window.confirm(
         `Game over! Do you want to restart?
-        Max points ${score}`
+        Max points ${overAllScore}`
       );
       if (confirmRestart) {
         restartGame();
@@ -108,15 +108,17 @@ const Game = () => {
     <div className={styles.game}>
       <div className={styles.score}>Score: {overAllScore}</div>
       <div className={styles.highScore}>Highscore: {highScore}</div>
-      {pokemonList.map((pokemon) => (
-        <div key={pokemon.id}>
-          <Card
-            pokemon={pokemon}
-            onClick={() => handleCardClick(pokemon.id)}
-            onGameOver={() => setGameOver(true)}
-          />
-        </div>
-      ))}
+      <div className={styles.cardsContainer}>
+        {pokemonList.map((pokemon) => (
+          <div className={styles.cardGame} key={pokemon.id}>
+            <Card
+              pokemon={pokemon}
+              onClick={() => handleCardClick(pokemon.id)}
+              onGameOver={() => setGameOver(true)}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
