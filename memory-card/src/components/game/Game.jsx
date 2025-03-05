@@ -13,6 +13,7 @@ const Game = () => {
   const [overAllScore, setOverAllScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [highScore, setHighScore] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -33,6 +34,17 @@ const Game = () => {
     setPokemonList([]);
     fetchData();
   }, [level]);
+
+  // Trigger animation when cards are shuffled
+  useEffect(() => {
+    if (pokemonList.length > 0) {
+      setIsAnimating(true); // Activate animation
+      const timeout = setTimeout(() => {
+        setIsAnimating(false); // Deactivate animation after it completes
+      }, 1000);
+      return () => clearTimeout(timeout); // Cleanup timeout
+    }
+  }, [pokemonList]);
 
   // Retrieve high score from localStorage on component mount
   useEffect(() => {
@@ -110,12 +122,20 @@ const Game = () => {
       <div className={styles.highScore}>Highscore: {highScore}</div>
       <div className={styles.cardsContainer}>
         {pokemonList.map((pokemon) => (
-          <div className={styles.cardGame} key={pokemon.id}>
-            <Card
-              pokemon={pokemon}
-              onClick={() => handleCardClick(pokemon.id)}
-              onGameOver={() => setGameOver(true)}
-            />
+          <div
+            className={`${styles.card} ${
+              isAnimating ? styles.flipAnimation : ""
+            }`}
+            key={pokemon.id}
+          >
+            <div className={styles.cardFront}>
+              <Card
+                pokemon={pokemon}
+                onClick={() => handleCardClick(pokemon.id)}
+                onGameOver={() => setGameOver(true)}
+              />
+            </div>
+            <div className={styles.cardBack}>Back</div>
           </div>
         ))}
       </div>
