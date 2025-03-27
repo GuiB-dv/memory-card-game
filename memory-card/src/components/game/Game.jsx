@@ -70,15 +70,14 @@ const Game = () => {
     if (clickedCards.includes(pokemonId)) {
       restartGame();
     } else {
-      setOverAllScore((prevOverAllScore) => prevOverAllScore + 1);
-      console.log(`Clicked on Pokémon with ID: ${pokemonId}`);
-      shuffleCards();
-      setClickedCards((prevClickedCards) => [...prevClickedCards, pokemonId]);
-
       // Check if all cards in the current level have been clicked
       if (clickedCards.length + 1 === pokemonList.length) {
         setLevel((prevLevel) => prevLevel + 1); // Move to the next level
       }
+      setOverAllScore((prevOverAllScore) => prevOverAllScore + 1);
+      console.log(`Clicked on Pokémon with ID: ${pokemonId}`);
+      shuffleCards();
+      setClickedCards((prevClickedCards) => [...prevClickedCards, pokemonId]);
     }
   };
 
@@ -101,17 +100,6 @@ const Game = () => {
   };
 
   // pop up if gameover
-  useEffect(() => {
-    if (gameOver) {
-      const confirmRestart = window.confirm(
-        `Game over! Do you want to restart?
-        Max points ${overAllScore}`
-      );
-      if (confirmRestart) {
-        restartGame();
-      }
-    }
-  }, [gameOver]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -128,12 +116,11 @@ const Game = () => {
             }`}
             key={pokemon.id}
           >
-            <div className={styles.cardFront}>
-              <Card
-                pokemon={pokemon}
-                onClick={() => handleCardClick(pokemon.id)}
-                onGameOver={() => setGameOver(true)}
-              />
+            <div
+              className={styles.cardFront}
+              onClick={() => handleCardClick(pokemon.id)}
+            >
+              <Card pokemon={pokemon} />
             </div>
             <div className={styles.cardBack}>Back</div>
           </div>

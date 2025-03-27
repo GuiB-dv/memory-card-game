@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from "react";
 import styles from "./Card.module.css";
 
-const Card = ({ pokemon, onClick, onGameOver }) => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    if (isClicked) {
-      // game over
-      console.log("It is clicked already");
-      onGameOver();
-    } else {
-      setIsClicked(true);
-      onClick();
-    }
-  };
-
+const Card = ({ pokemon }) => {
   return (
     <>
-      <div className={styles.card} onClick={handleClick}>
+      <div className={styles.card}>
         <img
           className={styles.img}
           src={pokemon.sprites.front_default}
