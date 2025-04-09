@@ -21,9 +21,17 @@
   padding: calc(8px * 0.3) 0;
 
   background-color: white;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .img {
   background-color: aliceblue;
   margin-bottom: 0.3em;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }

@@ -4,6 +4,8 @@ import Card from "../card/Card";
 import { fetchMultiplePokemon } from "../../utils/getData";
 import { shuffleArray } from "../../utils/utils";
 
+import pkbl from "../../assets/pkbl.png";
+
 const Game = () => {
   const [level, setLevel] = useState(1);
   const [pokemonList, setPokemonList] = useState([]);
@@ -35,13 +37,13 @@ const Game = () => {
     fetchData();
   }, [level]);
 
-  // Trigger animation when cards are shuffled
+  // Trigger ANIMATION when cards are shuffled
   useEffect(() => {
     if (pokemonList.length > 0) {
       setIsAnimating(true); // Activate animation
       const timeout = setTimeout(() => {
         setIsAnimating(false); // Deactivate animation after it completes
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timeout); // Cleanup timeout
     }
   }, [pokemonList]);
@@ -59,7 +61,7 @@ const Game = () => {
     localStorage.setItem("highScore", highScore);
   }, [highScore]);
 
-  // Shuffle the pokemonList array
+  // SHUFFLE the pokemonList array
   const shuffleCards = () => {
     const shuffledList = shuffleArray([...pokemonList]);
     setPokemonList(shuffledList);
@@ -122,7 +124,11 @@ const Game = () => {
             >
               <Card pokemon={pokemon} />
             </div>
-            <div className={styles.cardBack}>Back</div>
+            <div className={styles.cardBack}>
+              <div className={styles.pkbl}>
+                <img src={pkbl} alt="pokeball" />
+              </div>
+            </div>
           </div>
         ))}
       </div>

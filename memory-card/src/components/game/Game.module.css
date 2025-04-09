@@ -77,6 +77,10 @@
 
   width: 120px;
   height: 150px;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .cardFront {
@@ -90,6 +94,13 @@
   border-radius: 5px;
   background-color: #5d87fa;
   transform: rotateY(180deg);
+}
+
+.pkbl {
+  background-color: #89a5f1;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 
 .flipAnimation {
