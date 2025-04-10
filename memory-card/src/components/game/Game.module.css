@@ -119,8 +119,49 @@
   }
 }
 
+.scoreboard {
+  display: grid;
+  width: 100%;
+  grid-template-columns: max-content 1fr;
+  gap: var(--margin);
+}
+
 .score {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 90px;
+
+  background-color: #aac7a0c4;
+  color: #00000088;
+  padding: 10px;
+  border: 3px solid #aaa;
+  border-radius: 10px 10px 0px 10px;
+}
+
+.score p {
+  height: fit-content;
+  width: fit-content;
+  border: 2px solid rgba(0, 0, 0, 0.322);
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.lvl {
+  justify-self: end;
 }
 
 .highScore {
+  font-size: xx-large;
+  background-color: #aac7a0c4;
+  color: #00000088;
+
+  height: 90px;
+
+  padding: 10px;
+  border: 3px solid #aaa;
+  border-radius: 10px 10px 10px 0;
+}
+
+.highScore p {
+  text-align: center;
 }

@@ -3,6 +3,7 @@ import styles from "./Game.module.css";
 import Card from "../card/Card";
 import { fetchMultiplePokemon } from "../../utils/getData";
 import { shuffleArray } from "../../utils/utils";
+import Scorebar from "../scorebar/Scorebar";
 
 import pkbl from "../../assets/pkbl.png";
 
@@ -108,8 +109,17 @@ const Game = () => {
 
   return (
     <div className={styles.game}>
-      <div className={styles.score}>Score: {overAllScore}</div>
-      <div className={styles.highScore}>Highscore: {highScore}</div>
+      <div className={styles.scoreboard}>
+        <div className={styles.highScore}>
+          <p>High score!</p>
+          <p>{highScore}</p>
+        </div>
+        <div className={styles.score}>
+          <p>Score: {overAllScore}</p>
+          <p className={styles.lvl}>Lv: {level}</p>
+          <Scorebar />
+        </div>
+      </div>
       <div className={styles.cardsContainer}>
         {pokemonList.map((pokemon) => (
           <div
