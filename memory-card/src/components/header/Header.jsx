@@ -8,7 +8,6 @@ const Header = () => {
     <div className={styles.header}>
       <img src={pkbl} alt="pokeball" />
       Pokemon Memory Card Game
-      <img src={pkbl} alt="pokeball" />
     </div>
   );
 };

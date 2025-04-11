@@ -117,7 +117,7 @@ const Game = () => {
         <div className={styles.score}>
           <p>Score: {overAllScore}</p>
           <p className={styles.lvl}>Lv: {level}</p>
-          <Scorebar />
+          <Scorebar score={overAllScore} level={level} />
         </div>
       </div>
       <div className={styles.cardsContainer}>
