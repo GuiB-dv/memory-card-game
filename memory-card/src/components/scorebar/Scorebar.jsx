@@ -2,32 +2,23 @@ import React, { useEffect, useState } from "react";
 import styles from "./Scorebar.module.css";
 
 const Scorebar = ({ score, level }) => {
-  const [lvlThreshold, setLvlThreshold] = useState(5);
-  const [currentLevelScore, setCurrentLevelScore] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const pointsPerLevel = 5;
 
-  // Resets progress and set new threshold
+  // Resets progress with new level
   useEffect(() => {
-    const newThreshold = level * 5;
-    setLvlThreshold(newThreshold);
-    setCurrentLevelScore(0);
+    setProgress(0);
   }, [level]);
 
-  // Update current level score when overall score changes
+  // Increment progress when score changes
   useEffect(() => {
-    // Calculate score relative to current level
-    const baseScore = score - (level - 1) * 5;
-    setCurrentLevelScore(baseScore);
-    console.log("Progress percent:", progressPercent);
-    console.log("Threshold:", lvlThreshold);
-    console.log("Score:", score);
-    console.log("Base score:", currentLevelScore);
-  }, [score, level]);
+    if (score !== 0) {
+      setProgress((prev) => prev + 1);
+    }
+  }, [score]);
 
   //Calculate percentage
-  const progressPercent = Math.min(
-    (currentLevelScore / lvlThreshold) * 100,
-    100
-  );
+  const progressPercent = Math.min((progress / pointsPerLevel) * 100, 100);
 
   return (
     <>
