@@ -3,7 +3,6 @@ import styles from "./Scorebar.module.css";
 
 const Scorebar = ({ score, level }) => {
   const [progress, setProgress] = useState(0);
-  const pointsPerLevel = 5;
 
   // Resets progress with new level
   useEffect(() => {
@@ -18,7 +17,7 @@ const Scorebar = ({ score, level }) => {
   }, [score]);
 
   //Calculate percentage
-  const progressPercent = Math.min((progress / pointsPerLevel) * 100, 100);
+  const progressPercent = Math.min((progress / 5) * 100, 100);
 
   return (
     <>
