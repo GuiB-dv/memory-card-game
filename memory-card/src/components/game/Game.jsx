@@ -28,6 +28,7 @@ const Game = () => {
       setError(err.message);
     } finally {
       setIsLoading(false);
+      setGameOver(false);
     }
   };
 
@@ -86,7 +87,7 @@ const Game = () => {
 
   // Restart the game
   const restartGame = () => {
-    setGameOver(false);
+    setGameOver(true);
     setLevel(1);
     setPokemonList([]);
     setIsLoading(true);
@@ -102,11 +103,6 @@ const Game = () => {
     }
   };
 
-  // pop up if gameover
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
   return (
     <div className={styles.game}>
       <div className={styles.scoreboard}>
@@ -117,30 +113,42 @@ const Game = () => {
         <div className={styles.score}>
           <p>Score: {overAllScore}</p>
           <p className={styles.lvl}>Lv: {level}</p>
-          <Scorebar score={overAllScore} level={level} />
+          <Scorebar score={overAllScore} level={level} gameOver={gameOver} />
         </div>
       </div>
       <div className={styles.cardsContainer}>
-        {pokemonList.map((pokemon) => (
-          <div
-            className={`${styles.card} ${
-              isAnimating ? styles.flipAnimation : ""
-            }`}
-            key={pokemon.id}
-          >
-            <div
-              className={styles.cardFront}
-              onClick={() => handleCardClick(pokemon.id)}
-            >
-              <Card pokemon={pokemon} />
-            </div>
-            <div className={styles.cardBack}>
-              <div className={styles.pkbl}>
-                <img src={pkbl} alt="pokeball" />
-              </div>
+        {isLoading ? (
+          <div className={styles.loadingOverlay}>
+            <div className={styles.loading}>
+              Loading<span className={styles.dots}></span>
             </div>
           </div>
-        ))}
+        ) : error ? (
+          <div className={styles.errorOverlay}>
+            <div className={styles.error}>Error: {error.message}</div>
+          </div>
+        ) : (
+          pokemonList.map((pokemon) => (
+            <div
+              className={`${styles.card} ${
+                isAnimating ? styles.flipAnimation : ""
+              }`}
+              key={pokemon.id}
+            >
+              <div
+                className={styles.cardFront}
+                onClick={() => handleCardClick(pokemon.id)}
+              >
+                <Card pokemon={pokemon} />
+              </div>
+              <div className={styles.cardBack}>
+                <div className={styles.pkbl}>
+                  <img src={pkbl} alt="pokeball" />
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

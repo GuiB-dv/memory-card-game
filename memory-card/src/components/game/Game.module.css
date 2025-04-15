@@ -4,6 +4,53 @@
 
   --condensed-font: "Roboto Condensed", sans-serif;
 }
+
+.loadingOverlay,
+.errorOverlay {
+  grid-column: 2 / span 3; /* Center across 3 middle columns */
+  grid-row: 2; /* Middle row */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 10;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 100%;
+  width: 100%;
+
+  font-size: 2rem;
+}
+
+.dots::after {
+  content: "...";
+  animation: dotAnimation 1.5s infinite steps(1);
+}
+
+@keyframes dotAnimation {
+  0%,
+  25% {
+    content: " ";
+  }
+  25%,
+  50% {
+    content: ".";
+  }
+  50%,
+  75% {
+    content: "..";
+  }
+  75%,
+  100% {
+    content: "...";
+  }
+}
+
 .game {
   display: grid;
   grid-template-columns: 1fr;
@@ -35,6 +82,7 @@
   background-color: #d0ecff;
   position: relative;
 }
+
 .card:hover {
   cursor: pointer;
   transform: scale(1.05);
@@ -144,6 +192,8 @@
   border: 2px solid rgba(0, 0, 0, 0.322);
   padding: 2px;
   border-radius: 5px;
+
+  font-size: large;
 }
 
 .lvl {
