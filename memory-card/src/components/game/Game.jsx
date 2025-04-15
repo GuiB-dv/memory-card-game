@@ -23,7 +23,6 @@ const Game = () => {
       const numberOfCards = level * 5;
       const data = await fetchMultiplePokemon(numberOfCards);
       setPokemonList(data);
-      console.log("level", level);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -79,19 +78,18 @@ const Game = () => {
         setLevel((prevLevel) => prevLevel + 1); // Move to the next level
       }
       setOverAllScore((prevOverAllScore) => prevOverAllScore + 1);
-
-      const clickedPokemon = pokemonList.find(
-        (pokemon) => pokemon.id === pokemonId
-      ); // find the pkmn in pokemonList
-
-      console.log(
-        `Clicked on Pokémon - ID: ${pokemonId}, Name: ${
-          clickedPokemon?.name || "unknown"
-        }`
-      );
-
       shuffleCards();
       setClickedCards((prevClickedCards) => [...prevClickedCards, pokemonId]);
+
+      // const clickedPokemon = pokemonList.find(
+      //   (pokemon) => pokemon.id === pokemonId
+      // ); // find the pkmn in pokemonList
+
+      // console.log(
+      //   `Clicked on Pokémon - ID: ${pokemonId}, Name: ${
+      //     clickedPokemon?.name || "unknown"
+      //   }`
+      // );
     }
   };
 

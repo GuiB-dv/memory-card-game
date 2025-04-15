@@ -8,16 +8,13 @@ const Scorebar = ({ score, level, gameOver }) => {
   // Resets progress with new level
   useEffect(() => {
     setProgress(0);
-    console.log("Score:", score);
-    console.log("Progress:", progress);
   }, [level, gameOver]);
 
   // Increment progress when score changes
   useEffect(() => {
-    if (score !== 0) {
+    if (score !== 0 && score !== 5 && score !== 15) {
       setProgress((prev) => prev + 1);
     }
-    console.log("Progress score:", progress);
   }, [score]);
 
   //Calculate percentage
