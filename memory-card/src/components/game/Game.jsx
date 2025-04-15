@@ -79,7 +79,17 @@ const Game = () => {
         setLevel((prevLevel) => prevLevel + 1); // Move to the next level
       }
       setOverAllScore((prevOverAllScore) => prevOverAllScore + 1);
-      console.log(`Clicked on Pokémon with ID: ${pokemonId}`);
+
+      const clickedPokemon = pokemonList.find(
+        (pokemon) => pokemon.id === pokemonId
+      ); // find the pkmn in pokemonList
+
+      console.log(
+        `Clicked on Pokémon - ID: ${pokemonId}, Name: ${
+          clickedPokemon?.name || "unknown"
+        }`
+      );
+
       shuffleCards();
       setClickedCards((prevClickedCards) => [...prevClickedCards, pokemonId]);
     }
