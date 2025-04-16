@@ -1,0 +1,5 @@
+.github {
+  height: 1.5em;
+  width: auto; /* Maintain aspect ratio */
+  vertical-align: middle; /* Align properly with text */
+}

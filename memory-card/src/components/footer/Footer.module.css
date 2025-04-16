@@ -1,14 +1,31 @@
 .footer {
   height: 200px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  align-content: flex-end;
+
   background-color: #aaa;
   box-shadow: rgba(0, 0, 0, 0.15) 0px -2px 10px 0px;
+  color: #00000080;
 
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
+
+  font-size: large;
+}
+
+.footerAuthor {
+  text-align: center;
+}
+
+a {
+  color: #00000080;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #faf5aa9c;
 }
